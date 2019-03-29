@@ -3,7 +3,7 @@ package com.design.rpg.controller;
 import com.design.rpg.form.HumanType;
 import com.design.rpg.model.DoctorHumanModel;
 import com.design.rpg.model.GameModel;
-import com.design.rpg.model.strategy.NormalATKStrategy;
+import com.design.rpg.model.command.NormalATKCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +33,6 @@ public class GameController {
     @PostMapping("/attack")
     public void attack(@RequestParam char key) {
         // TODO:普攻、单个技能、组合技能
-        gameModel.humanAttack(new NormalATKStrategy());
+        gameModel.humanAttack(new NormalATKCommand());
     }
 }

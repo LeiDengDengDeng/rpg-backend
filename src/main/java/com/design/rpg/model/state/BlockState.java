@@ -1,6 +1,6 @@
 package com.design.rpg.model.state;
 
-import com.design.rpg.model.strategy.HumanATKStrategy;
+import com.design.rpg.model.command.HumanATKCommand;
 
 /**
  * @author deng
@@ -13,7 +13,7 @@ public class BlockState implements GameState {
     }
 
     @Override
-    public void humanAttack(HumanATKStrategy strategy) {
+    public void humanAttack(HumanATKCommand strategy) {
 
     }
 }

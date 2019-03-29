@@ -1,7 +1,7 @@
 package com.design.rpg.model;
 
 
-import com.design.rpg.model.strategy.*;
+import com.design.rpg.model.command.*;
 
 
 /**
@@ -16,14 +16,14 @@ public class DoctorHumanModel extends HumanModel {
 
     @Override
     public void init() {
-        this.getCdMap().put(DoctorFirstSkillATKStrategy.class,FIRST_SKILL_CD);
-        this.getCdMap().put(DoctorSecondSkillATKStrategy.class,SECOND_SKILL_CD);
-        this.getCdMap().put(DoctorThirdSkillATKStrategy.class,THIRD_SKILL_CD);
-        this.getCdMap().put(NormalATKStrategy.class,0);
+        this.getCdMap().put(DoctorFirstSkillATKCommand.class,FIRST_SKILL_CD);
+        this.getCdMap().put(DoctorSecondSkillATKCommand.class,SECOND_SKILL_CD);
+        this.getCdMap().put(DoctorThirdSkillATKCommand.class,THIRD_SKILL_CD);
+        this.getCdMap().put(NormalATKCommand.class,0);
 
-        this.getMyCDMap().put(DoctorFirstSkillATKStrategy.class,0);
-        this.getMyCDMap().put(DoctorSecondSkillATKStrategy.class,0);
-        this.getMyCDMap().put(DoctorThirdSkillATKStrategy.class,0);
+        this.getMyCDMap().put(DoctorFirstSkillATKCommand.class,0);
+        this.getMyCDMap().put(DoctorSecondSkillATKCommand.class,0);
+        this.getMyCDMap().put(DoctorThirdSkillATKCommand.class,0);
         this.setLevel(1);
         this.setCurLevelExp(0);
         this.setPower(2);
@@ -39,8 +39,8 @@ public class DoctorHumanModel extends HumanModel {
     }
 
     @Override
-    public void attack(MonsterModel monsterModel, HumanATKStrategy humanATKStrategy) {
-        humanATKStrategy.calculateATK(this,monsterModel);
+    public void attack(MonsterModel monsterModel, HumanATKCommand humanATKCommand) {
+        humanATKCommand.calculateATK(this,monsterModel);
     }
 
     @Override
@@ -50,5 +50,6 @@ public class DoctorHumanModel extends HumanModel {
         //牧师加五点攻击和五点体质
         this.setSpirit(this.getSpirit()+5);
         this.setPhysique(this.getPhysique()+5);
+        this.setMaxHP(this.getMaxHP()*this.getLevel()+this.getEndurance()*10);
     }
 }

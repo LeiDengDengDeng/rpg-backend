@@ -1,7 +1,7 @@
 package com.design.rpg.model.state;
 
 import com.design.rpg.model.GameModel;
-import com.design.rpg.model.strategy.HumanATKStrategy;
+import com.design.rpg.model.command.HumanATKCommand;
 import com.design.rpg.vo.MoveStateInfoVO;
 import com.design.rpg.vo.WaitingStateInfoVO;
 
@@ -35,7 +35,7 @@ public class MoveState implements GameState {
     }
 
     @Override
-    public void humanAttack(HumanATKStrategy strategy) {
+    public void humanAttack(HumanATKCommand strategy) {
 
     }
 }

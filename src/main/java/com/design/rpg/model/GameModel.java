@@ -4,7 +4,10 @@ import com.design.rpg.model.state.BlockState;
 import com.design.rpg.model.state.GameState;
 import com.design.rpg.model.state.HumanAttackState;
 import com.design.rpg.model.state.MoveState;
-import com.design.rpg.model.strategy.HumanATKStrategy;
+import com.design.rpg.model.command.HumanATKCommand;
+import com.design.rpg.model.stragety.HardMonsterStrategy;
+import com.design.rpg.model.stragety.NormalMonsterStrategy;
+import com.design.rpg.model.stragety.SimpleMonsterStrategy;
 import com.design.rpg.vo.*;
 import com.design.rpg.websocket.WebSocketServer;
 import lombok.Getter;
@@ -56,11 +59,11 @@ public class GameModel {
         curState.move();
     }
 
-    public void humanAttack(HumanATKStrategy strategy) {
+    public void humanAttack(HumanATKCommand strategy) {
         curState.humanAttack(strategy);
     }
 
-    public void humanAttackMonster(HumanATKStrategy strategy) {
+    public void humanAttackMonster(HumanATKCommand strategy) {
         curState = blockState;
 
         int humanHPChange = humanModel.getHP();
@@ -73,18 +76,18 @@ public class GameModel {
         monsterHPChange = monsterModel.getHP() - monsterHPChange;
 
         if (monsterModel.getHP() <= 0) {
-            monsterModel = null;
 
-            // TODO:结算的完善
             // 增长经验，如果经验满了还要升级，升级了还要涨技能点，在humanModel实现Exp++功能，而不是简单的set
-            humanModel.expUp(100);
+            humanModel.expUp(monsterModel.getWinExp());
             // 适当恢复人物一些HP
-            humanModel.setHP(humanModel.getHP() + 100);
+            int recoverHP = (int) (humanModel.getHP() * 1.1);
+            humanModel.setHP(recoverHP > humanModel.getMaxHP() ? recoverHP : humanModel.getMaxHP());
             humanHPChange += 100;
             // 随机掉落物品和金钱
-            humanModel.setMoney(humanModel.getMoney() + 100);
-            // humanModel.addItem()...
+            humanModel.setMoney(humanModel.getMoney() + monsterModel.getWinMoney());
+            // todo humanModel.addItem()...
 
+            monsterModel = null;
             sendMessage(new HumanWinStateInfoVO(humanHPChange, monsterHPChange, 100, 100));
 
             try {
@@ -140,14 +143,15 @@ public class GameModel {
     }
 
     public void createMonster() {
-        // TODO：需要根据人物的属性生成怪物
-        this.monsterModel = new MonsterModel();
-        monsterModel.setHP(100);
-        monsterModel.setMaxHP(100);
-        monsterModel.setATK(10);
-        monsterModel.setDEF(10);
+        double random = Math.random();
+        if (random < 0.6) {
+            this.monsterModel = new SimpleMonsterStrategy().createMonster(this.humanModel);
+        } else if (random < 0.9) {
+            this.monsterModel = new NormalMonsterStrategy().createMonster(this.humanModel);
+        } else {
+            this.monsterModel = new HardMonsterStrategy().createMonster(this.humanModel);
+        }
     }
-
 
     public void sendMessage(StateInfoVO stateInfoVO) {
         WebSocketServer.sendObject(userId, new InfoVO(stateInfoVO, humanModel, monsterModel));
