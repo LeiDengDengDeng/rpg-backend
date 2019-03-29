@@ -37,8 +37,6 @@ public class GameModel {
 
     public GameModel() {
         // TODO:持久化要考虑load和save，目前先不考虑持久化
-//        this.humanModel = new HumanModel();
-
         this.moveState = new MoveState(this);
         this.humanAttackState = new HumanAttackState(this);
         this.blockState = new BlockState();
@@ -47,8 +45,11 @@ public class GameModel {
         this.curState = this.moveState;
     }
 
-    public void createHumanModel(HumanModel humanModel) {
+    public void loadHumanModel(String userId, HumanModel humanModel) {
+        this.userId = userId;
         this.humanModel = humanModel;
+
+        sendMessage(new MoveStateInfoVO());
     }
 
     public void move() {

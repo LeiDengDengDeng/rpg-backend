@@ -22,8 +22,7 @@ public class GameController {
 
     @PostMapping("/create")
     public void create(@RequestParam String userId, @RequestParam HumanType humanType) {
-        gameModel.setUserId(userId);
-        gameModel.createHumanModel(new DoctorHumanModel());
+        gameModel.loadHumanModel(userId, new DoctorHumanModel());
     }
 
     @PostMapping("/move")
