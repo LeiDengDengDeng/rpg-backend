@@ -30,10 +30,16 @@ public abstract class HumanModel extends Creature {
     abstract public void attack(MonsterModel monsterModel, HumanATKStrategy humanATKStrategy);
 
     final public void expUp(int exp) {
-
+        curLevelExp+=exp;
+        //当前等级需要经验
+        int levelExp=(int)Math.pow(level,2);
+        int leftExp=curLevelExp-levelExp;
+        if(leftExp>=0){
+            levelUp(leftExp);
+        }
     }
 
-    abstract public void levelUp();
+    abstract public void levelUp(int exp);
 
 
     public void revive() {
