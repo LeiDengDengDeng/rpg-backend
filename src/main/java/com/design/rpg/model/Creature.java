@@ -12,6 +12,6 @@ import lombok.Data;
 public abstract class Creature {
     private int maxHP;  // 最大生命值
     private int HP;     // 当前生命值
-    private int ATK;    // 攻击力
-    private int DEF;    // 防御力
+    abstract int getATK();
+    abstract int getDEF();
 }
