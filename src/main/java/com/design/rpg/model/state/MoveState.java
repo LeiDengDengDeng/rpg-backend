@@ -2,6 +2,8 @@ package com.design.rpg.model.state;
 
 import com.design.rpg.model.GameModel;
 import com.design.rpg.model.strategy.HumanATKStrategy;
+import com.design.rpg.vo.MoveStateInfoVO;
+import com.design.rpg.vo.WaitingStateInfoVO;
 
 /**
  * @author deng
@@ -21,8 +23,14 @@ public class MoveState implements GameState {
         if (Math.random() > 0.5) {
             gameModel.createMonster();
             gameModel.setCurState(gameModel.getHumanAttackState());
+
+            // 前端变成等待用户攻击状态
+            gameModel.sendMessage(new WaitingStateInfoVO());
         } else {
-            gameModel.setCurState(gameModel.getBlockState());
+            gameModel.setCurState(gameModel.getMoveState());
+
+            // 前端变成依旧是等待用户移动状态
+            gameModel.sendMessage(new MoveStateInfoVO());
         }
     }
 

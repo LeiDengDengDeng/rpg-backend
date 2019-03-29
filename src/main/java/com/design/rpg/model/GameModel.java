@@ -5,14 +5,24 @@ import com.design.rpg.model.state.GameState;
 import com.design.rpg.model.state.HumanAttackState;
 import com.design.rpg.model.state.MoveState;
 import com.design.rpg.model.strategy.HumanATKStrategy;
+import com.design.rpg.vo.*;
+import com.design.rpg.websocket.WebSocketServer;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
 
 /**
  * @author deng
  * @date 2019/03/27
  */
+@Component
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class GameModel {
+    @Setter
+    private String userId;
+
     private HumanModel humanModel;
     private MonsterModel monsterModel;
 
@@ -37,20 +47,30 @@ public class GameModel {
         this.curState = this.moveState;
     }
 
+    public void createHumanModel(HumanModel humanModel) {
+        this.humanModel = humanModel;
+    }
+
     public void move() {
         curState.move();
-        // TODO:ws返回消息给前端
     }
 
     public void humanAttack(HumanATKStrategy strategy) {
         curState.humanAttack(strategy);
-        // TODO:ws返回消息给前端
     }
 
     public void humanAttackMonster(HumanATKStrategy strategy) {
         curState = blockState;
 
+        int humanHPChange = humanModel.getHP();
+        int monsterHPChange = monsterModel.getHP();
+
         humanModel.attack(monsterModel, strategy);
+
+        // 计算人物出招过程中血量变化
+        humanHPChange = humanModel.getHP() - humanHPChange;
+        monsterHPChange = monsterModel.getHP() - monsterHPChange;
+
         if (monsterModel.getHP() <= 0) {
             monsterModel = null;
 
@@ -59,19 +79,27 @@ public class GameModel {
             humanModel.expUp(100);
             // 适当恢复人物一些HP
             humanModel.setHP(humanModel.getHP() + 100);
+            humanHPChange += 100;
             // 随机掉落物品和金钱
             humanModel.setMoney(humanModel.getMoney() + 100);
             // humanModel.addItem()...
 
-            curState = moveState;
+            sendMessage(new HumanWinStateInfoVO(humanHPChange, monsterHPChange, 100, 100));
 
-            // TODO:ws.send
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            curState = moveState;
+            sendMessage(new MoveStateInfoVO());
         } else {
-            // TODO:ws.send
+            sendMessage(new HumanAttackStateInfoVO(humanHPChange, monsterHPChange));
+
             // 人物攻击结束，轮到monster攻击
             // ThreadSleep一会，模拟怪物攻击的等待时间
             try {
-                Thread.sleep(2000);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -79,14 +107,20 @@ public class GameModel {
         }
     }
 
-    public void monsterAttackHuman() {
+    protected void monsterAttackHuman() {
         curState = blockState;
 
+        int humanHPChange = humanModel.getHP();
+
+        // 怪物攻击人
         monsterModel.attack(humanModel);
+
+        humanHPChange = humanModel.getHP() - humanHPChange;
+
         if (humanModel.getHP() <= 0) {
             monsterModel = null;
 
-            // TODO:ws.send
+            sendMessage(new HumanReviveStateInfoVO(humanHPChange, -100));
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
@@ -95,19 +129,26 @@ public class GameModel {
             humanModel.revive();
 
             curState = moveState;
-            // TODO:ws.send
+
+            sendMessage(new MoveStateInfoVO());
         } else {
             curState = humanAttackState;
-            // TODO:ws.send
+
+            sendMessage(new MonsterAttackStateInfoVO(humanHPChange));
         }
     }
 
-    public void createMonster(){
+    public void createMonster() {
         // TODO：需要根据人物的属性生成怪物
         this.monsterModel = new MonsterModel();
-        monsterModel.setHP(1000);
-        monsterModel.setMaxHP(1000);
-        monsterModel.setATK(100);
-        monsterModel.setDEF(100);
+        monsterModel.setHP(100);
+        monsterModel.setMaxHP(100);
+        monsterModel.setATK(10);
+        monsterModel.setDEF(10);
+    }
+
+
+    public void sendMessage(StateInfoVO stateInfoVO) {
+        WebSocketServer.sendObject(userId, new InfoVO(stateInfoVO, humanModel, monsterModel));
     }
 }
