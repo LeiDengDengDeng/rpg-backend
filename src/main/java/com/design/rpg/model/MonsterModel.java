@@ -8,4 +8,7 @@ import lombok.Data;
  */
 @Data
 public class MonsterModel extends Creature {
+   public void attack(HumanModel humanModel){
+
+   }
 }

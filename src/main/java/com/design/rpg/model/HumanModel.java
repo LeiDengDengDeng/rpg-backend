@@ -1,5 +1,6 @@
 package com.design.rpg.model;
 
+import com.design.rpg.model.strategy.HumanATKStrategy;
 import lombok.Data;
 
 /**
@@ -9,7 +10,7 @@ import lombok.Data;
  * @date 2019/03/04
  */
 @Data
-public class HumanModel extends Creature {
+public abstract class HumanModel extends Creature {
     private int level;
     private int curLevelExp;
 
@@ -24,8 +25,16 @@ public class HumanModel extends Creature {
 
     // 背包
     // 身上的装备
-
     private int money;
+
+    abstract public void attack(MonsterModel monsterModel, HumanATKStrategy humanATKStrategy);
+
+    final public void expUp(int exp) {
+
+    }
+
+    abstract public void levelUp();
+
 
     public void revive() {
 

@@ -5,30 +5,31 @@ import com.design.rpg.model.state.GameState;
 import com.design.rpg.model.state.HumanAttackState;
 import com.design.rpg.model.state.MoveState;
 import com.design.rpg.model.strategy.HumanATKStrategy;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author deng
  * @date 2019/03/27
  */
-public class GameModel implements AbstractGame {
+public class GameModel {
     private HumanModel humanModel;
     private MonsterModel monsterModel;
 
-
+    @Getter
     private GameState moveState;            // 只支持move操作的状态
+    @Getter
     private GameState humanAttackState;     // 只支持用户攻击的状态
+    @Getter
     private GameState blockState;           // 所有操作都不支持的状态
-
-
-    private GameState curState; // 游戏当前状态
+    @Setter
+    private GameState curState;             // 游戏当前状态
 
     public GameModel() {
         // TODO:持久化要考虑load和save，目前先不考虑持久化
-        this.humanModel = new HumanModel();
-        this.monsterModel = new MonsterModel();
+//        this.humanModel = new HumanModel();
 
-
-        this.moveState = new MoveState();
+        this.moveState = new MoveState(this);
         this.humanAttackState = new HumanAttackState(this);
         this.blockState = new BlockState();
 
@@ -36,63 +37,77 @@ public class GameModel implements AbstractGame {
         this.curState = this.moveState;
     }
 
-    @Override
     public void move() {
         curState.move();
-        // 这里要负责创建MonsterModel
+        // TODO:ws返回消息给前端
     }
 
-    @Override
     public void humanAttack(HumanATKStrategy strategy) {
         curState.humanAttack(strategy);
+        // TODO:ws返回消息给前端
     }
 
-
-    public void humanAttackMonster(int humanATK) {
+    public void humanAttackMonster(HumanATKStrategy strategy) {
         curState = blockState;
 
-        monsterModel.setHP(monsterModel.getHP() - (humanATK - monsterModel.getDEF()));
-
-        // 改变状态  结算 or 怪物攻击
+        humanModel.attack(monsterModel, strategy);
         if (monsterModel.getHP() <= 0) {
             monsterModel = null;
 
             // TODO:结算的完善
             // 增长经验，如果经验满了还要升级，升级了还要涨技能点，在humanModel实现Exp++功能，而不是简单的set
-            humanModel.setCurLevelExp(humanModel.getCurLevelExp() + 10);
+            humanModel.expUp(100);
             // 适当恢复人物一些HP
             humanModel.setHP(humanModel.getHP() + 100);
             // 随机掉落物品和金钱
             humanModel.setMoney(humanModel.getMoney() + 100);
             // humanModel.addItem()...
 
-
             curState = moveState;
+
+            // TODO:ws.send
         } else {
+            // TODO:ws.send
             // 人物攻击结束，轮到monster攻击
             // ThreadSleep一会，模拟怪物攻击的等待时间
-            monsterAttackHuman(monsterModel.getATK());
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            monsterAttackHuman();
         }
     }
 
-    public void monsterAttackHuman(int monsterATK) {
+    public void monsterAttackHuman() {
         curState = blockState;
 
-        humanModel.setHP(humanModel.getHP() - (monsterATK - humanModel.getDEF()));
-
-        // 复活 or 人物攻击
+        monsterModel.attack(humanModel);
         if (humanModel.getHP() <= 0) {
             monsterModel = null;
 
-            // TODO:复活
-            // 写成每1秒回复1/5的血量，5秒复活完成
-            humanModel.setHP(humanModel.getMaxHP());
-            // 掉钱，甚至掉物品
-            humanModel.setMoney(humanModel.getMoney() - 100);
+            // TODO:ws.send
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            humanModel.revive();
 
             curState = moveState;
+            // TODO:ws.send
         } else {
             curState = humanAttackState;
+            // TODO:ws.send
         }
+    }
+
+    public void createMonster(){
+        // TODO：需要根据人物的属性生成怪物
+        this.monsterModel = new MonsterModel();
+        monsterModel.setHP(1000);
+        monsterModel.setMaxHP(1000);
+        monsterModel.setATK(100);
+        monsterModel.setDEF(100);
     }
 }
