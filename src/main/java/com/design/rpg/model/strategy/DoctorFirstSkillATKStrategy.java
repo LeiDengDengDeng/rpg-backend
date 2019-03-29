@@ -19,10 +19,6 @@ public class DoctorFirstSkillATKStrategy implements HumanATKStrategy {
     @Override
     public void calculateATK(HumanModel humanModel, MonsterModel monsterModel) {
         Map<Class,Integer> cdMap=humanModel.getMyCDMap();
-        //当前cd设为cd值
-        cdMap.replace(this.getClass(),humanModel.getCdMap().getOrDefault(this.getClass(),4)+1);
-        //其余cd都-1
-        cdMap.replaceAll((k,v)->v==0?v:v-1);
         //若还在cd
         if(cdMap.get(this.getClass())>0){return;}
 
@@ -33,6 +29,10 @@ public class DoctorFirstSkillATKStrategy implements HumanATKStrategy {
         }else{
             humanModel.setHP(HP);
         }
+        //当前cd设为cd值
+        cdMap.replace(this.getClass(),humanModel.getCdMap().getOrDefault(this.getClass(),4)+1);
+        //其余cd都-1
+        cdMap.replaceAll((k,v)->v==0?v:v-1);
 
     }
 }

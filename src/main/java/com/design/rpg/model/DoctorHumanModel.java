@@ -1,10 +1,7 @@
 package com.design.rpg.model;
 
 
-import com.design.rpg.model.strategy.DoctorFirstSkillATKStrategy;
-import com.design.rpg.model.strategy.DoctorSecondSkillATKStrategy;
-import com.design.rpg.model.strategy.DoctorThirdSkillATKStrategy;
-import com.design.rpg.model.strategy.HumanATKStrategy;
+import com.design.rpg.model.strategy.*;
 
 
 /**
@@ -22,6 +19,7 @@ public class DoctorHumanModel extends HumanModel {
         this.getCdMap().put(DoctorFirstSkillATKStrategy.class,FIRST_SKILL_CD);
         this.getCdMap().put(DoctorSecondSkillATKStrategy.class,SECOND_SKILL_CD);
         this.getCdMap().put(DoctorThirdSkillATKStrategy.class,THIRD_SKILL_CD);
+        this.getCdMap().put(NormalATKStrategy.class,0);
 
         this.getMyCDMap().put(DoctorFirstSkillATKStrategy.class,0);
         this.getMyCDMap().put(DoctorSecondSkillATKStrategy.class,0);

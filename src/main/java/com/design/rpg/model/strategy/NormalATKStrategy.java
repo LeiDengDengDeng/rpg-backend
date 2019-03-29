@@ -12,7 +12,7 @@ public class NormalATKStrategy implements HumanATKStrategy {
 
     @Override
     public void calculateATK(HumanModel humanModel, MonsterModel monsterModel) {
-        int attack=humanModel.getPower();
+        int attack=humanModel.getATK();
         int defence=monsterModel.getDEF();
         int hurt=attack>defence?attack-defence:0;
         monsterModel.setHP(monsterModel.getHP()-hurt);
