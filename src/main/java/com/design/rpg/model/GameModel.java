@@ -71,7 +71,6 @@ public class GameModel {
     public void humanAttack(char key) {
         AssertUtil.assertNotNull(humanModel, ServiceException.NOT_EXIST);
 
-        // TODO:其他角色的
         switch (key) {
             case 'H':
                 curState.humanAttack(new NormalATKCommand());
@@ -81,19 +80,45 @@ public class GameModel {
                     case DOCTOR:
                         curState.humanAttack(new DoctorFirstSkillATKCommand());
                         return;
+                    case SOLDIER:
+                        curState.humanAttack(new SoldierFirstSkillATKCommand());
+                        return;
+                    case ASSASSIN:
+                        curState.humanAttack(new AssassanFirstSkillATKCommand());
+                        return;
+                    default:
+                        throw new ServiceException(ServiceException.KEY_NOT_MATCHED);
                 }
             case 'K':
                 switch (humanModel.getHumanType()) {
                     case DOCTOR:
                         curState.humanAttack(new DoctorSecondSkillATKCommand());
                         return;
+                    case SOLDIER:
+                        curState.humanAttack(new SoldierSecondSkillATKCommand());
+                        return;
+                    case ASSASSIN:
+                        curState.humanAttack(new AssassanSecondSkillATKCommand());
+                        return;
+                    default:
+                        throw new ServiceException(ServiceException.KEY_NOT_MATCHED);
                 }
             case 'L':
                 switch (humanModel.getHumanType()) {
                     case DOCTOR:
                         curState.humanAttack(new DoctorThirdSkillATKCommand());
                         return;
+                    case SOLDIER:
+                        curState.humanAttack(new SoldierThirdSkillATKCommand());
+                        return;
+                    case ASSASSIN:
+                        curState.humanAttack(new AssassanThirdSkillATKCommand());
+                        return;
+                    default:
+                        throw new ServiceException(ServiceException.KEY_NOT_MATCHED);
                 }
+            default:
+                throw new ServiceException(ServiceException.KEY_NOT_MATCHED);
         }
     }
 

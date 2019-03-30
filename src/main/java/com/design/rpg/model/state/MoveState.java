@@ -19,7 +19,7 @@ public class MoveState implements GameState {
     public void move() {
         gameModel.setCurState(gameModel.getBlockState());
 
-        if (Math.random() > 0.5) {
+        if (Math.random() > 0.3) {
             gameModel.createMonster();
             gameModel.setCurState(gameModel.getHumanAttackState());
 
