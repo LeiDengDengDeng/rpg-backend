@@ -2,6 +2,7 @@ package com.design.rpg.vo;
 
 import com.design.rpg.form.HumanType;
 import com.design.rpg.model.builder.Equipment;
+import com.design.rpg.model.builder.Role;
 import lombok.Data;
 
 import java.util.List;
@@ -28,5 +29,6 @@ public class HumanVO {
 
     private HumanType humanType;
 
-    private List<Equipment> bag;
+    private List<Equipment> bag;    //背包
+    private Role role;              //身上的装备
 }
