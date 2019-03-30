@@ -45,11 +45,11 @@ public class GameModel {
         this.curState = this.moveState;
     }
 
-    public void loadHumanModel(String userId, HumanModel humanModel) {
+    public InfoVO loadHumanModel(String userId, HumanModel humanModel) {
         this.userId = userId;
         this.humanModel = humanModel;
 
-        sendMessage(new MoveStateInfoVO());
+        return new InfoVO(new MoveStateInfoVO(), humanModel, monsterModel);
     }
 
     public void move() {
