@@ -1,10 +1,10 @@
 package com.design.rpg.controller;
 
+import com.design.rpg.exception.ServiceException;
 import com.design.rpg.form.HumanType;
-import com.design.rpg.model.DoctorHumanModel;
 import com.design.rpg.model.GameModel;
+import com.design.rpg.model.builder.InitDoctorBuilder;
 import com.design.rpg.vo.InfoVO;
-import com.design.rpg.model.command.NormalATKCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +23,16 @@ public class GameController {
 
     @PostMapping("/create")
     public InfoVO create(@RequestParam String userId, @RequestParam HumanType humanType) {
-        return gameModel.loadHumanModel(userId, new DoctorHumanModel());
+        switch (humanType) {
+            case DOCTOR:
+                return gameModel.loadHumanModel(userId, new InitDoctorBuilder().createHuman());
+            case SOLDIER:
+                // TODO：修改
+                return gameModel.loadHumanModel(userId, new InitDoctorBuilder().createHuman());
+            case ASSASSIN:
+                return gameModel.loadHumanModel(userId, new InitDoctorBuilder().createHuman());
+        }
+        throw new ServiceException(ServiceException.HUMAN_WRONG_TYPE);
     }
 
     @PostMapping("/move")
@@ -33,7 +42,6 @@ public class GameController {
 
     @PostMapping("/attack")
     public void attack(@RequestParam char key) {
-        // TODO:普攻、单个技能、组合技能
-        gameModel.humanAttack(new NormalATKCommand());
+        gameModel.humanAttack(key);
     }
 }

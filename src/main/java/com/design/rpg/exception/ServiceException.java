@@ -19,6 +19,7 @@ public class ServiceException extends RuntimeException {
     public static final int IN_CD = 601;
     public static final int NOT_EXIST = 602;
     public static final int NOT_MATCHED = 603;
+    public static final int HUMAN_WRONG_TYPE = 604;
 
 
     private static Map<Integer, String> errorMap;
@@ -29,6 +30,7 @@ public class ServiceException extends RuntimeException {
         errorMap.put(IN_CD, "技能CD中");
         errorMap.put(NOT_EXIST, "角色不存在");
         errorMap.put(NOT_MATCHED,"装备和角色不匹配");
+        errorMap.put(HUMAN_WRONG_TYPE, "角色类型异常");
     }
 
     public ServiceException(int errCode) {

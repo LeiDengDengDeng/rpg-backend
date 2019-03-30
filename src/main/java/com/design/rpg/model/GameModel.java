@@ -2,7 +2,10 @@ package com.design.rpg.model;
 
 import com.design.rpg.controller.WebSocketServer;
 import com.design.rpg.exception.ServiceException;
+import com.design.rpg.model.command.DoctorFirstSkillATKCommand;
+import com.design.rpg.model.command.DoctorSecondSkillATKCommand;
 import com.design.rpg.model.command.HumanATKCommand;
+import com.design.rpg.model.command.NormalATKCommand;
 import com.design.rpg.model.state.BlockState;
 import com.design.rpg.model.state.GameState;
 import com.design.rpg.model.state.HumanAttackState;
@@ -67,9 +70,27 @@ public class GameModel {
         curState.move();
     }
 
-    public void humanAttack(HumanATKCommand strategy) {
+    public void humanAttack(char key) {
+        // TODO:普攻、单个技能、组合技能
         AssertUtil.assertNotNull(humanModel, ServiceException.NOT_EXIST);
-        curState.humanAttack(strategy);
+
+        switch (key) {
+            case ' ':
+                curState.humanAttack(new NormalATKCommand());
+                return;
+            case 'J':
+                switch (humanModel.getHumanType()) {
+                    case DOCTOR:
+                        curState.humanAttack(new DoctorFirstSkillATKCommand());
+                        return;
+                }
+            case 'K':
+                switch (humanModel.getHumanType()) {
+                    case DOCTOR:
+                        curState.humanAttack(new DoctorSecondSkillATKCommand());
+                        return;
+                }
+        }
     }
 
     public void humanAttackMonster(HumanATKCommand strategy) {
