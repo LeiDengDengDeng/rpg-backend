@@ -1,7 +1,6 @@
 package com.design.rpg.vo;
 
 import com.design.rpg.form.HumanType;
-import com.design.rpg.model.builder.Equipment;
 import com.design.rpg.model.builder.Role;
 import lombok.Data;
 
@@ -27,8 +26,12 @@ public class HumanVO {
     private int endurance;  // 耐力
     private int luck;       // 幸运
 
+    private int money;
+
     private HumanType humanType;
 
-    private List<Equipment> bag;    //背包
+    private List<EquipmentVO> bag;    //背包
     private Role role;              //身上的装备
+
+    private List<SkillVO> skills;
 }

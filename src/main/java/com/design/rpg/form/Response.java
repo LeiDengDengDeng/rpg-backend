@@ -23,6 +23,10 @@ public class Response<T> {
         this.code = code;
     }
 
+    public static <T> Response<T> okEmptyResponse() {
+        return okResponse(null);
+    }
+
     public static <T> Response<T> okResponse(Object data) {
         return new Response(0, data);
     }
