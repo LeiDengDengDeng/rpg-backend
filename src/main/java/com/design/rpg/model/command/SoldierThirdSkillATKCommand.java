@@ -8,10 +8,10 @@ import java.util.Map;
 /**
  * Created by liying on 2019/3/28.
  */
-public class DoctorThirdSkillATKCommand implements HumanATKCommand {
+public class SoldierThirdSkillATKCommand implements HumanATKCommand {
 
-    private static final int FIRST_CD=3;
-    private static final int SECOND_CD=4;
+    private static final int FIRST_CD=4;
+    private static final int SECOND_CD=5;
 
     /**
      * 部分魔法攻击加轻微治疗(吸血)
@@ -27,17 +27,11 @@ public class DoctorThirdSkillATKCommand implements HumanATKCommand {
         if(cdMap.get(this.getClass())>0){return;}
 
         //攻击
-        int attack=humanModel.getATK()+humanModel.getSpirit();
+        int attack=(int)(humanModel.getATK()*1.5)+humanModel.getPower()*3;
         int defence=monsterModel.getDEF();
         int hurt=attack>defence?attack-defence:0;
         monsterModel.setHP(monsterModel.getHP()-hurt);
-        //自愈
-        int HP=(int)(humanModel.getMaxHP()*0.1)+humanModel.getHP();
-        if(HP>=humanModel.getMaxHP()){
-            humanModel.setHP(humanModel.getMaxHP());
-        }else{
-            humanModel.setHP(HP);
-        }
+
         //当前cd设为cd值
         cdMap.replace(this.getClass(),this.getCD()+1);
         cdMap.replace(DoctorFirstSkillATKCommand.class,FIRST_CD);
@@ -49,17 +43,17 @@ public class DoctorThirdSkillATKCommand implements HumanATKCommand {
 
     @Override
     public String getName() {
-        return "爱的魔力转圈圈";
+        return "达拉崩吧之斩";
     }
 
     @Override
     public String getDescription() {
-        return "攻击怪物加并少量恢复自身血量";
+        return "对怪物造成爆炸性伤害";
     }
 
     @Override
     public int getCD() {
-        return 3;
+        return 6;
     }
 
     @Override

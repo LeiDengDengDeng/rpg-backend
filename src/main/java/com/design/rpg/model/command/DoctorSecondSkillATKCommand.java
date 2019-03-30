@@ -22,7 +22,7 @@ public class DoctorSecondSkillATKCommand implements HumanATKCommand {
         //若还在cd
         if(cdMap.get(this.getClass())>0){return;}
 
-        int attack=(int)(humanModel.getATK()+humanModel.getSpirit()*0.6);
+        int attack=humanModel.getATK()+humanModel.getSpirit()*2;
         int defence=monsterModel.getDEF();
         int hurt=attack>defence?attack-defence:0;
         monsterModel.setHP(monsterModel.getHP()-hurt);

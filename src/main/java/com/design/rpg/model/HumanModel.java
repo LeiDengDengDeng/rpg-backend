@@ -87,10 +87,12 @@ public abstract class HumanModel extends Creature {
     public void equip(String uuid){
         Equipment equipment=bag.stream().filter(equipment1 -> equipment1.getUuid().equals(uuid)).findFirst().get();
         AssertUtil.assertNotNull(equipment,ServiceException.NOT_EXIST);
+        int maxHP=this.getMaxHP();
         switch (equipment.getType()){
             case BODY:
                 if(role.getBody()!=null){
                     bag.add(role.getBody());
+                    maxHP-=role.getBody().getHP();
                 }
                 role.setBody((Body)equipment);
                 break;
@@ -99,18 +101,22 @@ public abstract class HumanModel extends Creature {
                 AssertUtil.assertTrue(weapon.getWeaponType()!=this.getHumanType(),ServiceException.NOT_MATCHED);
                 if(role.getWeapon()!=null){
                     bag.add(role.getWeapon());
+                    maxHP-=role.getWeapon().getHP();
                 }
                 role.setWeapon(weapon);
                 break;
             case HEAD:
                 if(role.getHead()!=null){
                     bag.add(role.getHead());
+                    maxHP-=role.getHead().getHP();
                 }
                 role.setHead((Head)equipment);
                 break;
             default:
                 break;
         }
+        this.setMaxHP(maxHP+equipment.getHP());
+        bag.remove(equipment);
     }
 
     public int splitEquipment(String uuid){
