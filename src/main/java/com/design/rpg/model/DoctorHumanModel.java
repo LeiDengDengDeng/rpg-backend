@@ -1,6 +1,7 @@
 package com.design.rpg.model;
 
 
+import com.design.rpg.form.HumanType;
 import com.design.rpg.model.command.*;
 
 
@@ -35,6 +36,7 @@ public class DoctorHumanModel extends HumanModel {
         this.setMoney(0);
         this.setMaxHP(100);
         this.setHP(100);
+        this.setHumanType(HumanType.DOCTOR);
 
     }
 
