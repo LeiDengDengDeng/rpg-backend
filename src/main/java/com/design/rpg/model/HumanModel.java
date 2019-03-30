@@ -7,6 +7,7 @@ import com.design.rpg.model.command.HumanATKCommand;
 import com.design.rpg.util.AssertUtil;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +41,7 @@ public abstract class HumanModel extends Creature {
     public HumanModel(){
         cdMap=new HashMap<>();
         myCDMap=new HashMap<>();
+        bag=new ArrayList<>();
     }
 
     // HP等的计算方式与属性有关

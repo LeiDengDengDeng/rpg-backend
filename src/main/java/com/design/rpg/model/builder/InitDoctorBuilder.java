@@ -54,6 +54,10 @@ public class InitDoctorBuilder implements HumanBuilder {
 
     @Override
     public HumanModel createHuman() {
+        doctorHumanModel =new DoctorHumanModel();
+        buildAttributes();
+        buildCDMap();
+        buildRole();
         return doctorHumanModel;
     }
 }
