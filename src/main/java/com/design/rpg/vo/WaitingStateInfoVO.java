@@ -10,5 +10,6 @@ import lombok.Getter;
 public class WaitingStateInfoVO extends StateInfoVO {
     public WaitingStateInfoVO() {
         this.state = GameStateEnum.WAITING;
+        this.curLog = "等待人物攻击中...\n";
     }
 }

@@ -9,4 +9,5 @@ import lombok.Data;
 @Data
 public abstract class StateInfoVO {
     GameStateEnum state;
+    String curLog;
 }

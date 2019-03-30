@@ -1,4 +1,7 @@
-package com.design.rpg.exception;
+package com.design.rpg.util;
+
+import com.design.rpg.exception.GlobalExceptionHandler;
+import com.design.rpg.exception.ServiceException;
 
 import java.util.Objects;
 

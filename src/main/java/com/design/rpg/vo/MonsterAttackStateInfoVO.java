@@ -13,5 +13,6 @@ public class MonsterAttackStateInfoVO extends StateInfoVO {
     public MonsterAttackStateInfoVO(int humanHPChange) {
         this.state = GameStateEnum.ATTACKED;
         this.humanHPChange = humanHPChange;
+        this.curLog = "人物受到怪物攻击，减少" + (-humanHPChange) + "点血量!\n";
     }
 }

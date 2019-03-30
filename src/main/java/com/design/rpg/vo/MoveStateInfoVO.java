@@ -10,5 +10,6 @@ import lombok.Getter;
 public class MoveStateInfoVO extends StateInfoVO {
     public MoveStateInfoVO() {
         this.state = GameStateEnum.MOVING;
+        this.curLog = "人物闲逛中...\n";
     }
 }

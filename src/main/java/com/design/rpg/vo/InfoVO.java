@@ -1,7 +1,5 @@
 package com.design.rpg.vo;
 
-import com.design.rpg.model.HumanModel;
-import com.design.rpg.model.MonsterModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -15,6 +13,6 @@ import lombok.Getter;
 @Getter
 public class InfoVO {
     private StateInfoVO stateInfoVO;
-    private HumanModel humanModel;
-    private MonsterModel monsterModel;
+    private HumanVO humanModel;
+    private MonsterVO monsterModel;
 }

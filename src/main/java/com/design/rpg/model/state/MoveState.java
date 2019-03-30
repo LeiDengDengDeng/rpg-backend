@@ -2,7 +2,7 @@ package com.design.rpg.model.state;
 
 import com.design.rpg.model.GameModel;
 import com.design.rpg.model.command.HumanATKCommand;
-import com.design.rpg.model.factory.StateInfoVOFactory;
+import com.design.rpg.vo.factory.StateInfoVOFactory;
 
 /**
  * @author deng

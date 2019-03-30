@@ -1,4 +1,4 @@
-package com.design.rpg.model.factory;
+package com.design.rpg.vo.factory;
 
 import com.design.rpg.vo.*;
 
@@ -7,7 +7,8 @@ import com.design.rpg.vo.*;
  * @date 2019/03/30
  */
 public final class StateInfoVOFactory {
-    private StateInfoVOFactory(){}
+    private StateInfoVOFactory() {
+    }
 
     public static StateInfoVO createMoveStateInfoVO() {
         return new MoveStateInfoVO();
@@ -21,8 +22,8 @@ public final class StateInfoVOFactory {
         return new HumanReviveStateInfoVO(humanHPChange, moneyChange);
     }
 
-    public static StateInfoVO createHumanWinStateInfoVO(int humanHPChange, int monsterHPChange, int moneyChange, int expUp) {
-        return new HumanWinStateInfoVO(humanHPChange, monsterHPChange, moneyChange, expUp);
+    public static StateInfoVO createHumanWinStateInfoVO(int humanHPChange, int monsterHPChange, int moneyChange, int expUp, boolean levelUpFlag, int hpUp) {
+        return new HumanWinStateInfoVO(humanHPChange, monsterHPChange, moneyChange, expUp, levelUpFlag, hpUp);
     }
 
     public static StateInfoVO createHumanAttackStateInfoVO(int humanHPChange, int monsterHPChange) {
