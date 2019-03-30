@@ -5,7 +5,7 @@ import com.design.rpg.form.MonsterType;
 import com.design.rpg.model.HumanModel;
 import com.design.rpg.model.MonsterModel;
 import com.design.rpg.model.builder.Equipment;
-import com.design.rpg.model.builder.EquipmentFactory;
+import com.design.rpg.model.factory.EquipmentFactory;
 
 import java.util.ArrayList;
 import java.util.List;

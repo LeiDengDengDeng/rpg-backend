@@ -1,8 +1,12 @@
-package com.design.rpg.model.builder;
+package com.design.rpg.model.factory;
 
 import com.design.rpg.form.ColorType;
 import com.design.rpg.form.EquipmentType;
 import com.design.rpg.form.HumanType;
+import com.design.rpg.model.builder.Body;
+import com.design.rpg.model.builder.Equipment;
+import com.design.rpg.model.builder.Head;
+import com.design.rpg.model.builder.Weapon;
 
 import java.util.UUID;
 
@@ -49,7 +53,7 @@ public class EquipmentFactory {
         }
         return createEquipment(humanType,equipmentType,colorType);
     }
-    static private Weapon createWeapon(HumanType humanType,ColorType colorType){
+    static private Weapon createWeapon(HumanType humanType, ColorType colorType){
         Weapon weapon=new Weapon();
         setAttribute(colorType,weapon);
         weapon.setWeaponType(humanType);

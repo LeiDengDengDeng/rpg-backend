@@ -3,7 +3,7 @@ package com.design.rpg.model.state;
 import com.design.rpg.model.command.HumanATKCommand;
 
 /**
- * 游戏状态：闲逛中，Role攻击中，Monster攻击中，复活中
+ * 游戏状态：闲逛中，等待攻击中，阻塞中
  *
  * @author deng
  * @date 2019/03/04
