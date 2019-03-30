@@ -52,14 +52,16 @@ public abstract class HumanModel extends Creature {
 
     abstract public void attack(MonsterModel monsterModel, HumanATKCommand humanATKCommand);
 
-    final public void expUp(int exp) {
+    final public boolean expUp(int exp) {
         curLevelExp+=exp;
         //当前等级需要经验
         int levelExp=this.getLevelExp();
         int leftExp=curLevelExp-levelExp;
         if(leftExp>=0){
             levelUp(leftExp);
+            return true;
         }
+        return false;
     }
 
     abstract public void levelUp(int exp);

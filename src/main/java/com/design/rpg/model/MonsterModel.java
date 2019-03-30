@@ -1,5 +1,6 @@
 package com.design.rpg.model;
 
+import com.design.rpg.form.MonsterType;
 import lombok.Data;
 
 /**
@@ -12,6 +13,7 @@ public class MonsterModel extends Creature {
    private int DEF;
    private int winExp;
    private int winMoney;
+   private MonsterType monsterType;
 
    public void attack(HumanModel humanModel){
          humanModel.setHP(humanModel.getHP()-(this.getATK()-humanModel.getDEF()>0?this.getATK()-humanModel.getDEF():0));

@@ -1,5 +1,6 @@
 package com.design.rpg.model.stragety;
 
+import com.design.rpg.form.MonsterType;
 import com.design.rpg.model.HumanModel;
 import com.design.rpg.model.MonsterModel;
 
@@ -16,6 +17,7 @@ public class HardMonsterStrategy implements MonsterGenerateStrategy{
         monsterModel.setDEF((int)(humanModel.getATK()*0.9));
         monsterModel.setWinMoney((int)(13+Math.random()*9));
         monsterModel.setWinExp((int)(13+Math.random()*9));
+        monsterModel.setMonsterType(MonsterType.HARD);
 
 
 

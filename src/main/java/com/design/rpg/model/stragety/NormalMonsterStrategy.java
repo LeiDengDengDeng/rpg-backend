@@ -1,5 +1,6 @@
 package com.design.rpg.model.stragety;
 
+import com.design.rpg.form.MonsterType;
 import com.design.rpg.model.HumanModel;
 import com.design.rpg.model.MonsterModel;
 
@@ -17,6 +18,7 @@ public class NormalMonsterStrategy implements MonsterGenerateStrategy{
         //6-12
         monsterModel.setWinMoney((int)(6+Math.random()*7));
         monsterModel.setWinExp((int)(6+Math.random()*7));
+        monsterModel.setMonsterType(MonsterType.NORMAL);
         return monsterModel;
     }
 }
