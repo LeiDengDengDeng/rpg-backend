@@ -99,7 +99,7 @@ public class GameModel {
             }
             // 随机掉落物品和金钱
             humanModel.setMoney(humanModel.getMoney() + monsterModel.getWinMoney());
-            // todo humanModel.addItem()...
+            humanModel.getNewItems(monsterModel.getWinEquipment());
 
             sendMessage(StateInfoVOFactory.createHumanWinStateInfoVO(humanHPChange, monsterHPChange, monsterModel.getWinMoney(), monsterModel.getWinExp(), levelUpFlag, hpUp));
             monsterModel = null;

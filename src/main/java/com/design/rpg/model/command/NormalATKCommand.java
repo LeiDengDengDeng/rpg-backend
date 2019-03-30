@@ -18,4 +18,9 @@ public class NormalATKCommand implements HumanATKCommand {
         monsterModel.setHP(monsterModel.getHP()-hurt);
 
     }
+
+    @Override
+    public String getName() {
+        return "普攻";
+    }
 }

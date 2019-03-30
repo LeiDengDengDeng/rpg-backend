@@ -41,4 +41,9 @@ public class DoctorThirdSkillATKCommand implements HumanATKCommand {
         cdMap.replaceAll((k,v)->v==0?v:v-1);
 
     }
+
+    @Override
+    public String getName() {
+        return "爱的魔力转圈圈";
+    }
 }

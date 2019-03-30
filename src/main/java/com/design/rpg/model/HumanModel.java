@@ -1,9 +1,10 @@
 package com.design.rpg.model;
 
+import com.design.rpg.exception.ServiceException;
 import com.design.rpg.form.HumanType;
-import com.design.rpg.model.builder.Equipment;
-import com.design.rpg.model.builder.Role;
+import com.design.rpg.model.builder.*;
 import com.design.rpg.model.command.HumanATKCommand;
+import com.design.rpg.util.AssertUtil;
 import lombok.Data;
 
 import java.util.HashMap;
@@ -39,7 +40,6 @@ public abstract class HumanModel extends Creature {
     public HumanModel(){
         cdMap=new HashMap<>();
         myCDMap=new HashMap<>();
-        init();
     }
 
     // HP等的计算方式与属性有关
@@ -48,7 +48,6 @@ public abstract class HumanModel extends Creature {
     // 身上的装备
     private int money;
 
-    abstract  public void init();
 
     abstract public void attack(MonsterModel monsterModel, HumanATKCommand humanATKCommand);
 
@@ -76,7 +75,7 @@ public abstract class HumanModel extends Creature {
     }
     @Override
     public int getDEF(){
-        return (physique+endurance)*3+role.getDEF();
+        return (endurance)*3+role.getDEF();
     }
 
     public int getLevelExp(){
@@ -84,12 +83,38 @@ public abstract class HumanModel extends Creature {
     }
 
     public void Equip(String uuid){
+        Equipment equipment=bag.stream().filter(equipment1 -> equipment1.getUuid().equals(uuid)).findFirst().get();
+        AssertUtil.assertNotNull(equipment,ServiceException.NOT_EXIST);
+        switch (equipment.getType()){
+            case BODY:
+                role.setBody((Body)equipment);
+                break;
+            case WEAPON:
+                Weapon weapon=(Weapon)equipment;
+                AssertUtil.assertTrue(weapon.getWeaponType()!=this.getHumanType(),ServiceException.NOT_MATCHED);
+                role.setWeapon(weapon);
+                break;
+            case HEAD:
+                role.setHead((Head)equipment);
+                break;
+            default:
+                break;
+        }
+    }
 
+    public void splitEquipment(String uuid){
+        Equipment equipment=bag.stream().filter(equipment1 -> equipment1.getUuid().equals(uuid)).findFirst().get();
+        AssertUtil.assertNotNull(equipment,ServiceException.NOT_EXIST);
+        int money=equipment.splitUp();
+        bag.remove(equipment);
+        this.setMoney(this.getMoney()+money);
     }
     public void dead(){
         this.money=(int)(this.money*0.9);
     }
 
-
+    public void getNewItems(List<Equipment> equipments){
+        this.bag.addAll(equipments);
+    }
 
 }

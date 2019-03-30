@@ -22,8 +22,7 @@ public class DoctorFirstSkillATKCommand implements HumanATKCommand {
         //若还在cd
         if(cdMap.get(this.getClass())>0){return;}
 
-
-        int HP=(int)(humanModel.getMaxHP()*0.2)+humanModel.getHP();
+        int HP=(int)(humanModel.getMaxHP()*0.2)+humanModel.getHP()+humanModel.getATK();
         if(HP>=humanModel.getMaxHP()){
             humanModel.setHP(humanModel.getMaxHP());
         }else{
@@ -34,5 +33,10 @@ public class DoctorFirstSkillATKCommand implements HumanATKCommand {
         //其余cd都-1
         cdMap.replaceAll((k,v)->v==0?v:v-1);
 
+    }
+
+    @Override
+    public String getName() {
+        return "十全大补";
     }
 }

@@ -14,4 +14,6 @@ public interface HumanATKCommand {
      * @return 攻击值
      */
     void calculateATK(HumanModel humanModel, MonsterModel monsterModel);
+
+    String getName();
 }
