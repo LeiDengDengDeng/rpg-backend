@@ -66,7 +66,7 @@ public abstract class HumanModel extends Creature {
 
 
     public void revive() {
-        this.setHP(this.getMaxHP()*20);
+        this.setHP((int)(this.getMaxHP()*0.8));
     }
     @Override
     public int getATK(){
