@@ -87,14 +87,23 @@ public abstract class HumanModel extends Creature {
         AssertUtil.assertNotNull(equipment,ServiceException.NOT_EXIST);
         switch (equipment.getType()){
             case BODY:
+                if(role.getBody()!=null){
+                    bag.add(role.getBody());
+                }
                 role.setBody((Body)equipment);
                 break;
             case WEAPON:
                 Weapon weapon=(Weapon)equipment;
                 AssertUtil.assertTrue(weapon.getWeaponType()!=this.getHumanType(),ServiceException.NOT_MATCHED);
+                if(role.getWeapon()!=null){
+                    bag.add(role.getWeapon());
+                }
                 role.setWeapon(weapon);
                 break;
             case HEAD:
+                if(role.getHead()!=null){
+                    bag.add(role.getHead());
+                }
                 role.setHead((Head)equipment);
                 break;
             default:
