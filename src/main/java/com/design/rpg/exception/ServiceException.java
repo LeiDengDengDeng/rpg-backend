@@ -17,6 +17,7 @@ public class ServiceException extends RuntimeException {
 
     public static final int CAN_NOT_OPERATE = 600;
     public static final int IN_CD = 601;
+    public static final int NOT_EXIST = 602;
 
     private static Map<Integer, String> errorMap;
 
@@ -24,6 +25,7 @@ public class ServiceException extends RuntimeException {
         errorMap = new HashMap<>();
         errorMap.put(CAN_NOT_OPERATE, "无法操作");
         errorMap.put(IN_CD, "技能CD中");
+        errorMap.put(NOT_EXIST, "角色不存在");
     }
 
     public ServiceException(int errCode) {
