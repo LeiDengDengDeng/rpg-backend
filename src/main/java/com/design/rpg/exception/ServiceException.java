@@ -21,6 +21,7 @@ public class ServiceException extends RuntimeException {
     public static final int NOT_MATCHED = 603;
     public static final int HUMAN_WRONG_TYPE = 604;
     public static final int MONEY_NOT_ENOUGH = 605;
+    public static final int KEY_NOT_MATCHED = 605;
 
 
 
@@ -34,6 +35,7 @@ public class ServiceException extends RuntimeException {
         errorMap.put(NOT_MATCHED,"装备和角色不匹配");
         errorMap.put(HUMAN_WRONG_TYPE, "角色类型异常");
         errorMap.put(HUMAN_WRONG_TYPE,"角色金币不够");
+        errorMap.put((KEY_NOT_MATCHED),"无该键值对应技能");
     }
 
     public ServiceException(int errCode) {
