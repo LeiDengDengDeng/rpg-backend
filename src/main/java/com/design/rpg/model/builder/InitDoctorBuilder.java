@@ -13,7 +13,7 @@ import com.design.rpg.model.command.NormalATKCommand;
  */
 public class InitDoctorBuilder implements HumanBuilder {
     DoctorHumanModel doctorHumanModel;
-    InitRoleBuilder initRoleBuilder;
+    InitRoleBuilder initRoleBuilder=new InitRoleBuilder();
     private static final int FIRST_SKILL_CD=4;
     private static final int SECOND_SKILL_CD=3;
     private static final int THIRD_SKILL_CD=2;
