@@ -3,6 +3,7 @@ package com.design.rpg.controller;
 import com.design.rpg.form.HumanType;
 import com.design.rpg.model.DoctorHumanModel;
 import com.design.rpg.model.GameModel;
+import com.design.rpg.vo.InfoVO;
 import com.design.rpg.model.command.NormalATKCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,8 +22,8 @@ public class GameController {
     private GameModel gameModel;
 
     @PostMapping("/create")
-    public void create(@RequestParam String userId, @RequestParam HumanType humanType) {
-        gameModel.loadHumanModel(userId, new DoctorHumanModel());
+    public InfoVO create(@RequestParam String userId, @RequestParam HumanType humanType) {
+        return gameModel.loadHumanModel(userId, new DoctorHumanModel());
     }
 
     @PostMapping("/move")

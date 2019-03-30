@@ -1,15 +1,18 @@
 package com.design.rpg.model;
 
+import com.design.rpg.controller.WebSocketServer;
+import com.design.rpg.model.command.HumanATKCommand;
+import com.design.rpg.model.factory.InfoVOFactory;
+import com.design.rpg.model.factory.StateInfoVOFactory;
 import com.design.rpg.model.state.BlockState;
 import com.design.rpg.model.state.GameState;
 import com.design.rpg.model.state.HumanAttackState;
 import com.design.rpg.model.state.MoveState;
-import com.design.rpg.model.command.HumanATKCommand;
 import com.design.rpg.model.stragety.HardMonsterStrategy;
 import com.design.rpg.model.stragety.NormalMonsterStrategy;
 import com.design.rpg.model.stragety.SimpleMonsterStrategy;
-import com.design.rpg.vo.*;
-import com.design.rpg.websocket.WebSocketServer;
+import com.design.rpg.vo.InfoVO;
+import com.design.rpg.vo.StateInfoVO;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.context.annotation.Scope;
@@ -48,11 +51,11 @@ public class GameModel {
         this.curState = this.moveState;
     }
 
-    public void loadHumanModel(String userId, HumanModel humanModel) {
+    public InfoVO loadHumanModel(String userId, HumanModel humanModel) {
         this.userId = userId;
         this.humanModel = humanModel;
 
-        sendMessage(new MoveStateInfoVO());
+        return new InfoVO(StateInfoVOFactory.createMoveStateInfoVO(), humanModel, monsterModel);
     }
 
     public void move() {
@@ -88,7 +91,7 @@ public class GameModel {
             // todo humanModel.addItem()...
 
             monsterModel = null;
-            sendMessage(new HumanWinStateInfoVO(humanHPChange, monsterHPChange, 100, 100));
+            sendMessage(StateInfoVOFactory.createHumanWinStateInfoVO(humanHPChange, monsterHPChange, 100, 100));
 
             try {
                 Thread.sleep(3000);
@@ -96,9 +99,9 @@ public class GameModel {
                 e.printStackTrace();
             }
             curState = moveState;
-            sendMessage(new MoveStateInfoVO());
+            sendMessage(StateInfoVOFactory.createMoveStateInfoVO());
         } else {
-            sendMessage(new HumanAttackStateInfoVO(humanHPChange, monsterHPChange));
+            sendMessage(StateInfoVOFactory.createHumanAttackStateInfoVO(humanHPChange, monsterHPChange));
 
             // 人物攻击结束，轮到monster攻击
             // ThreadSleep一会，模拟怪物攻击的等待时间
@@ -124,7 +127,7 @@ public class GameModel {
         if (humanModel.getHP() <= 0) {
             monsterModel = null;
 
-            sendMessage(new HumanReviveStateInfoVO(humanHPChange, -100));
+            sendMessage(StateInfoVOFactory.createHumanReviveStateInfoVO(humanHPChange, -100));
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
@@ -134,11 +137,11 @@ public class GameModel {
 
             curState = moveState;
 
-            sendMessage(new MoveStateInfoVO());
+            sendMessage(StateInfoVOFactory.createMoveStateInfoVO());
         } else {
             curState = humanAttackState;
 
-            sendMessage(new MonsterAttackStateInfoVO(humanHPChange));
+            sendMessage(StateInfoVOFactory.createMonsterAttackStateInfoVO(humanHPChange));
         }
     }
 
@@ -154,6 +157,6 @@ public class GameModel {
     }
 
     public void sendMessage(StateInfoVO stateInfoVO) {
-        WebSocketServer.sendObject(userId, new InfoVO(stateInfoVO, humanModel, monsterModel));
+        WebSocketServer.sendObject(userId, InfoVOFactory.createInfoVO(stateInfoVO, humanModel, monsterModel));
     }
 }

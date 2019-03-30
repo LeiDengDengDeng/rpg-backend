@@ -1,4 +1,4 @@
-package com.design.rpg.websocket;
+package com.design.rpg.controller;
 
 import lombok.extern.apachecommons.CommonsLog;
 import org.json.JSONObject;
