@@ -5,9 +5,7 @@ import com.design.rpg.form.HumanType;
 import com.design.rpg.form.Response;
 import com.design.rpg.model.GameModel;
 import com.design.rpg.model.HumanModel;
-import com.design.rpg.model.builder.InitAssassanBuilder;
 import com.design.rpg.model.builder.InitDoctorBuilder;
-import com.design.rpg.model.builder.InitSoldierBuilder;
 import com.design.rpg.util.Converter;
 import com.design.rpg.vo.HumanVO;
 import com.design.rpg.vo.InfoVO;
@@ -31,12 +29,11 @@ public class GameController {
             case DOCTOR:
                 return gameModel.loadHumanModel(userId, new InitDoctorBuilder().createHuman());
             case SOLDIER:
-                return gameModel.loadHumanModel(userId, new InitSoldierBuilder().createHuman());
+                return gameModel.loadHumanModel(userId, new InitDoctorBuilder().createHuman());
             case ASSASSIN:
-                return gameModel.loadHumanModel(userId, new InitAssassanBuilder().createHuman());
-            default:
-                throw new ServiceException(ServiceException.HUMAN_WRONG_TYPE);
+                return gameModel.loadHumanModel(userId, new InitDoctorBuilder().createHuman());
         }
+        throw new ServiceException(ServiceException.HUMAN_WRONG_TYPE);
     }
 
     @PostMapping("/move")
