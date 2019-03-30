@@ -1,4 +1,4 @@
-package com.design.rpg.model.strategy;
+package com.design.rpg.model.command;
 
 import com.design.rpg.model.HumanModel;
 import com.design.rpg.model.MonsterModel;
@@ -7,7 +7,7 @@ import com.design.rpg.model.MonsterModel;
  * @author deng
  * @date 2019/03/27
  */
-public interface HumanATKStrategy {
+public interface HumanATKCommand {
     /**
      * 计算攻击杀伤力
      *

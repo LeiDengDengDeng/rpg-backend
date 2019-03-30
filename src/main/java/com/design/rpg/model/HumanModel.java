@@ -1,6 +1,6 @@
 package com.design.rpg.model;
 
-import com.design.rpg.model.strategy.HumanATKStrategy;
+import com.design.rpg.model.command.HumanATKCommand;
 import lombok.Data;
 
 import java.util.HashMap;
@@ -41,12 +41,12 @@ public abstract class HumanModel extends Creature {
 
     abstract  public void init();
 
-    abstract public void attack(MonsterModel monsterModel, HumanATKStrategy humanATKStrategy);
+    abstract public void attack(MonsterModel monsterModel, HumanATKCommand humanATKCommand);
 
     final public void expUp(int exp) {
         curLevelExp+=exp;
         //当前等级需要经验
-        int levelExp=(int)Math.pow(level,2)*10;
+        int levelExp=this.getLevelExp();
         int leftExp=curLevelExp-levelExp;
         if(leftExp>=0){
             levelUp(leftExp);
@@ -57,7 +57,8 @@ public abstract class HumanModel extends Creature {
 
 
     public void revive() {
-
+        this.setHP(this.getMaxHP()*20);
+        this.setMoney((int)(Math.random()*this.level*10));
     }
     @Override
     public int getATK(){
@@ -66,6 +67,9 @@ public abstract class HumanModel extends Creature {
     @Override
     public int getDEF(){
         return (physique+endurance)*3;
+    }
+    public int getLevelExp(){
+        return (int)Math.pow(level,2)*10;
     }
 
 }

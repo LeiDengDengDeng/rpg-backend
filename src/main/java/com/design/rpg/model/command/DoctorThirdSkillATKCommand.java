@@ -1,4 +1,4 @@
-package com.design.rpg.model.strategy;
+package com.design.rpg.model.command;
 
 import com.design.rpg.model.HumanModel;
 import com.design.rpg.model.MonsterModel;
@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Created by liying on 2019/3/28.
  */
-public class DoctorThirdSkillATKStrategy implements HumanATKStrategy {
+public class DoctorThirdSkillATKCommand implements HumanATKCommand {
 
     /**
      * 部分魔法攻击加轻微治疗(吸血)

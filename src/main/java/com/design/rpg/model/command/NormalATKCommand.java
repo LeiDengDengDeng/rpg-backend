@@ -1,4 +1,4 @@
-package com.design.rpg.model.strategy;
+package com.design.rpg.model.command;
 
 
 import com.design.rpg.model.HumanModel;
@@ -7,7 +7,7 @@ import com.design.rpg.model.MonsterModel;
 /**
  * Created by liying on 2019/3/28.
  */
-public class NormalATKStrategy implements HumanATKStrategy {
+public class NormalATKCommand implements HumanATKCommand {
 
 
     @Override
