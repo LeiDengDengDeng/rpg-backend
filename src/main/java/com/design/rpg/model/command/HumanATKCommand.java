@@ -16,4 +16,10 @@ public interface HumanATKCommand {
     void calculateATK(HumanModel humanModel, MonsterModel monsterModel);
 
     String getName();
+
+    String getDescription();
+
+    int getCD();
+
+    char getBindKey();
 }

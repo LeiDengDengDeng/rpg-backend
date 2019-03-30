@@ -35,11 +35,11 @@ public abstract class HumanModel extends Creature {
     Role role;              //身上的装备
 
 
-    private Map<Class,Integer> cdMap;
+    private List<HumanATKCommand> commandList;
     private Map<Class,Integer> myCDMap;
 
     public HumanModel(){
-        cdMap=new HashMap<>();
+        commandList=new ArrayList<>();
         myCDMap=new HashMap<>();
         bag=new ArrayList<>();
     }
@@ -84,7 +84,7 @@ public abstract class HumanModel extends Creature {
         return (int)Math.pow(level,2)*10;
     }
 
-    public void Equip(String uuid){
+    public void equip(String uuid){
         Equipment equipment=bag.stream().filter(equipment1 -> equipment1.getUuid().equals(uuid)).findFirst().get();
         AssertUtil.assertNotNull(equipment,ServiceException.NOT_EXIST);
         switch (equipment.getType()){
@@ -113,12 +113,13 @@ public abstract class HumanModel extends Creature {
         }
     }
 
-    public void splitEquipment(String uuid){
+    public int splitEquipment(String uuid){
         Equipment equipment=bag.stream().filter(equipment1 -> equipment1.getUuid().equals(uuid)).findFirst().get();
         AssertUtil.assertNotNull(equipment,ServiceException.NOT_EXIST);
         int money=equipment.splitUp();
         bag.remove(equipment);
         this.setMoney(this.getMoney()+money);
+        return money;
     }
     public void dead(){
         this.money=(int)(this.money*0.9);
@@ -126,6 +127,18 @@ public abstract class HumanModel extends Creature {
 
     public void getNewItems(List<Equipment> equipments){
         this.bag.addAll(equipments);
+    }
+
+    public boolean strengthEquipment(String uuid){
+        Equipment equipment=bag.stream().filter(equipment1 -> equipment1.getUuid().equals(uuid)).findFirst().get();
+        AssertUtil.assertNotNull(equipment,ServiceException.NOT_EXIST);
+        int money=equipment.getMoneyPayed();
+        AssertUtil.assertTrue(money<=this.money,ServiceException.MONEY_NOT_ENOUGH);
+        boolean res=equipment.levelUp();
+        if(res){
+            this.money-=money;
+        }
+        return res;
     }
 
 }

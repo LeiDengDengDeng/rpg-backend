@@ -76,6 +76,7 @@ public class EquipmentFactory {
     static private Head createHead(ColorType colorType){
         Head head=new Head();
         setAttribute(colorType,head);
+        head.setName(head.getName()+"头盔");
         head.setUrl(HEAD_PIC);
         return head;
     }
@@ -83,6 +84,7 @@ public class EquipmentFactory {
     static private Body createBody(ColorType colorType){
         Body body=new Body();
         setAttribute(colorType,body);
+        body.setName(body.getName()+"外套");
         body.setUrl(BODY_PIC);
         return body;
     }

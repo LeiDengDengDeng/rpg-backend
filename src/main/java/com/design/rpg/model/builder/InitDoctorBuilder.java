@@ -14,9 +14,7 @@ import com.design.rpg.model.command.NormalATKCommand;
 public class InitDoctorBuilder implements HumanBuilder {
     DoctorHumanModel doctorHumanModel;
     InitRoleBuilder initRoleBuilder=new InitRoleBuilder();
-    private static final int FIRST_SKILL_CD=4;
-    private static final int SECOND_SKILL_CD=3;
-    private static final int THIRD_SKILL_CD=2;
+
 
     @Override
     public void buildAttributes() {
@@ -42,10 +40,10 @@ public class InitDoctorBuilder implements HumanBuilder {
 
     @Override
     public void buildCDMap() {
-        doctorHumanModel.getCdMap().put(DoctorFirstSkillATKCommand.class,FIRST_SKILL_CD);
-        doctorHumanModel.getCdMap().put(DoctorSecondSkillATKCommand.class,SECOND_SKILL_CD);
-        doctorHumanModel.getCdMap().put(DoctorThirdSkillATKCommand.class,THIRD_SKILL_CD);
-        doctorHumanModel.getCdMap().put(NormalATKCommand.class,0);
+        doctorHumanModel.getCommandList().add(new DoctorFirstSkillATKCommand());
+        doctorHumanModel.getCommandList().add(new DoctorSecondSkillATKCommand());
+        doctorHumanModel.getCommandList().add(new DoctorThirdSkillATKCommand());
+        doctorHumanModel.getCommandList().add(new NormalATKCommand());
 
         doctorHumanModel.getMyCDMap().put(DoctorFirstSkillATKCommand.class,0);
         doctorHumanModel.getMyCDMap().put(DoctorSecondSkillATKCommand.class,0);

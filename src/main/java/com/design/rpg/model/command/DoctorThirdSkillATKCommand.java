@@ -36,7 +36,7 @@ public class DoctorThirdSkillATKCommand implements HumanATKCommand {
             humanModel.setHP(HP);
         }
         //当前cd设为cd值
-        cdMap.replace(this.getClass(),humanModel.getCdMap().getOrDefault(this.getClass(),4)+1);
+        cdMap.replace(this.getClass(),this.getCD()+1);
         //其余cd都-1
         cdMap.replaceAll((k,v)->v==0?v:v-1);
 
@@ -45,5 +45,20 @@ public class DoctorThirdSkillATKCommand implements HumanATKCommand {
     @Override
     public String getName() {
         return "爱的魔力转圈圈";
+    }
+
+    @Override
+    public String getDescription() {
+        return "攻击怪物加并少量恢复自身血量";
+    }
+
+    @Override
+    public int getCD() {
+        return 4;
+    }
+
+    @Override
+    public char getBindKey() {
+        return 'L';
     }
 }

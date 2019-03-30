@@ -23,4 +23,19 @@ public class NormalATKCommand implements HumanATKCommand {
     public String getName() {
         return "普攻";
     }
+
+    @Override
+    public String getDescription() {
+        return "对敌人造成少量伤害";
+    }
+
+    @Override
+    public int getCD() {
+        return 0;
+    }
+
+    @Override
+    public char getBindKey() {
+        return 'H';
+    }
 }

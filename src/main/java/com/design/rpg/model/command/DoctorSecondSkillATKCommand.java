@@ -27,7 +27,7 @@ public class DoctorSecondSkillATKCommand implements HumanATKCommand {
         int hurt=attack>defence?attack-defence:0;
         monsterModel.setHP(monsterModel.getHP()-hurt);
         //当前cd设为cd值
-        cdMap.replace(this.getClass(),humanModel.getCdMap().getOrDefault(this.getClass(),4)+1);
+        cdMap.replace(this.getClass(),this.getCD()+1);
         //其余cd都-1
         cdMap.replaceAll((k,v)->v==0?v:v-1);
 
@@ -36,5 +36,20 @@ public class DoctorSecondSkillATKCommand implements HumanATKCommand {
     @Override
     public String getName() {
         return "爱心攻击biubiubiu";
+    }
+
+    @Override
+    public String getDescription() {
+        return "对怪物造成一定伤害";
+    }
+
+    @Override
+    public int getCD() {
+        return 3;
+    }
+
+    @Override
+    public char getBindKey() {
+        return 'K';
     }
 }

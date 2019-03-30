@@ -10,6 +10,7 @@ import java.util.Map;
  */
 public class DoctorFirstSkillATKCommand implements HumanATKCommand {
 
+
     /**
      * 治疗术
      * @param humanModel
@@ -29,7 +30,7 @@ public class DoctorFirstSkillATKCommand implements HumanATKCommand {
             humanModel.setHP(HP);
         }
         //当前cd设为cd值
-        cdMap.replace(this.getClass(),humanModel.getCdMap().getOrDefault(this.getClass(),4)+1);
+        cdMap.replace(this.getClass(),this.getCD()+1);
         //其余cd都-1
         cdMap.replaceAll((k,v)->v==0?v:v-1);
 
@@ -38,5 +39,20 @@ public class DoctorFirstSkillATKCommand implements HumanATKCommand {
     @Override
     public String getName() {
         return "十全大补";
+    }
+
+    @Override
+    public String getDescription() {
+        return "恢复自身血量";
+    }
+
+    @Override
+    public int getCD() {
+        return 2;
+    }
+
+    @Override
+    public char getBindKey() {
+        return 'J';
     }
 }
