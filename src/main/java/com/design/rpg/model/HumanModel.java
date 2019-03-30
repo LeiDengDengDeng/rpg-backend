@@ -67,7 +67,6 @@ public abstract class HumanModel extends Creature {
 
     public void revive() {
         this.setHP(this.getMaxHP()*20);
-        this.setMoney((int)(Math.random()*this.level*10));
     }
     @Override
     public int getATK(){
@@ -84,6 +83,9 @@ public abstract class HumanModel extends Creature {
 
     public void Equip(String uuid){
 
+    }
+    public void dead(){
+        this.money=(int)(this.money*0.9);
     }
 
 
