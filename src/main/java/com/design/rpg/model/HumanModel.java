@@ -98,7 +98,7 @@ public abstract class HumanModel extends Creature {
                 break;
             case WEAPON:
                 Weapon weapon=(Weapon)equipment;
-                AssertUtil.assertTrue(weapon.getWeaponType()!=this.getHumanType(),ServiceException.NOT_MATCHED);
+                AssertUtil.assertTrue(weapon.getWeaponType()==this.getHumanType(),ServiceException.NOT_MATCHED);
                 if(role.getWeapon()!=null){
                     bag.add(role.getWeapon());
                     maxHP-=role.getWeapon().getHP();
