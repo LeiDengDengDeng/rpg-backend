@@ -7,7 +7,7 @@ import com.design.rpg.model.command.HumanATKCommand;
 /**
  * Created by liying on 2019/3/29.
  */
-public class AssassanHumanModel extends HumanModel {
+public class AssassinHumanModel extends HumanModel {
 
 
     @Override
