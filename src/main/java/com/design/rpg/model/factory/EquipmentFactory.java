@@ -18,7 +18,7 @@ public class EquipmentFactory {
     private static final String WEAPON_KNIFE_PIC="http://120.77.205.70:8078/picture/59af115c-3a18-4ab8-9ba3-5fd76625a1e4WechatIMG17842.png";
     private static final String WEAPON_SWORD_PIC="http://120.77.205.70:8078/picture/861c2a58-9db7-401c-bcf5-fa90d746385cWechatIMG17845.png";
     private static final String WEAPON_WAND_PIC="http://120.77.205.70:8078/picture/0fea3d91-58eb-487f-94f0-b1d457d79cd5WechatIMG17840.png";
-    private static final String HEAD_PIC="http://120.77.205.70:8078/picture/8eca1251-cd45-4aa3-a9f4-f8255aa731d1WechatIMG17843.png";
+    private static final String HEAD_PIC="http://120.77.205.70:8078/picture/105a3d09-6a7d-449a-a955-c3b8dcf50ebbWechatIMG17844.png";
 
 
 
