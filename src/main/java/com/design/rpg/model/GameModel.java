@@ -59,6 +59,7 @@ public class GameModel {
 
         this.userId = userId;
         this.humanModel = humanModel;
+        this.monsterModel = null;
 
         return InfoVOFactory.createInfoVO(StateInfoVOFactory.createMoveStateInfoVO(), this.humanModel, this.monsterModel);
     }
