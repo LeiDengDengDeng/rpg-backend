@@ -28,7 +28,7 @@ public class InitAssassinBuilder implements HumanBuilder {
         assassinHumanModel.setLuck(2);
         assassinHumanModel.setMoney(0);
         assassinHumanModel.setMaxHP(100);
-        assassinHumanModel.setHP(100);
+        assassinHumanModel.setHp(100);
         assassinHumanModel.setHumanType(HumanType.ASSASSIN);
 
     }

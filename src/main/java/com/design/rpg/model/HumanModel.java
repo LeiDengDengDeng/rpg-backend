@@ -69,15 +69,15 @@ public abstract class HumanModel extends Creature {
 
 
     public void revive() {
-        this.setHP((int)(this.getMaxHP()*0.8));
+        this.setHp((int)(this.getMaxHP()*0.8));
     }
     @Override
-    public int getATK(){
-        return (power+agility+spirit+physique+endurance)*3+role.getATK();
+    public int getAtk(){
+        return (power+agility+spirit+physique+endurance)*3+role.getAtk();
     }
     @Override
-    public int getDEF(){
-        return (endurance)*3+role.getDEF();
+    public int getDef(){
+        return (endurance)*3+role.getDef();
     }
 
     public int getLevelExp(){
@@ -92,7 +92,7 @@ public abstract class HumanModel extends Creature {
             case BODY:
                 if(role.getBody()!=null){
                     bag.add(role.getBody());
-                    maxHP-=role.getBody().getHP();
+                    maxHP-=role.getBody().getHp();
                 }
                 role.setBody((Body)equipment);
                 break;
@@ -101,21 +101,21 @@ public abstract class HumanModel extends Creature {
                 AssertUtil.assertTrue(weapon.getWeaponType()==this.getHumanType(),ServiceException.NOT_MATCHED);
                 if(role.getWeapon()!=null){
                     bag.add(role.getWeapon());
-                    maxHP-=role.getWeapon().getHP();
+                    maxHP-=role.getWeapon().getHp();
                 }
                 role.setWeapon(weapon);
                 break;
             case HEAD:
                 if(role.getHead()!=null){
                     bag.add(role.getHead());
-                    maxHP-=role.getHead().getHP();
+                    maxHP-=role.getHead().getHp();
                 }
                 role.setHead((Head)equipment);
                 break;
             default:
                 break;
         }
-        this.setMaxHP(maxHP+equipment.getHP());
+        this.setMaxHP(maxHP+equipment.getHp());
         bag.remove(equipment);
     }
 

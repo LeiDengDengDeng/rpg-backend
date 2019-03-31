@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public abstract class Equipment {
 //    private EquipmentType equipmentType;
-//    private MainAttrType mainAttrType;   // ATK/DEF
+//    private MainAttrType mainAttrType;   // atk/def
 
     String uuid;
     int levelUpTimes;
@@ -60,13 +60,13 @@ public abstract class Equipment {
     public int splitUp(){
         return power+agility+spirit+physique+endurance+luck;
     }
-    public int getATK(){
+    public int getAtk(){
         return power+agility+spirit+physique+endurance;
     }
-    public int getDEF(){
+    public int getDef(){
         return endurance;
     }
-    public int getHP(){return physique;}
+    public int getHp(){return physique;}
     public int getMoneyPayed(){
         return (int)Math.pow(levelUpTimes,2)*10;
     }

@@ -1,12 +1,12 @@
 package com.design.rpg.model.builder;
 
 import com.design.rpg.form.HumanType;
-import com.design.rpg.model.SoldierHumanModel;
 import com.design.rpg.model.HumanModel;
+import com.design.rpg.model.SoldierHumanModel;
+import com.design.rpg.model.command.NormalATKCommand;
 import com.design.rpg.model.command.SoldierFirstSkillATKCommand;
 import com.design.rpg.model.command.SoldierSecondSkillATKCommand;
 import com.design.rpg.model.command.SoldierThirdSkillATKCommand;
-import com.design.rpg.model.command.NormalATKCommand;
 
 /**
  * Created by liying on 2019/3/31.
@@ -28,7 +28,7 @@ public class InitSoldierBuilder implements HumanBuilder {
         soldierHumanModel.setLuck(2);
         soldierHumanModel.setMoney(0);
         soldierHumanModel.setMaxHP(100);
-        soldierHumanModel.setHP(100);
+        soldierHumanModel.setHp(100);
         soldierHumanModel.setHumanType(HumanType.SOLDIER);
 
     }

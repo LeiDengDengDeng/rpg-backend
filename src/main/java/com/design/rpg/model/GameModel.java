@@ -125,27 +125,27 @@ public class GameModel {
     public void humanAttackMonster(HumanATKCommand strategy) {
         curState = blockState;
 
-        int humanHPChange = humanModel.getHP();
-        int monsterHPChange = monsterModel.getHP();
+        int humanHPChange = humanModel.getHp();
+        int monsterHPChange = monsterModel.getHp();
 
         humanModel.attack(monsterModel, strategy);
 
         // 计算人物出招过程中血量变化
-        humanHPChange = humanModel.getHP() - humanHPChange;
-        monsterHPChange = monsterModel.getHP() - monsterHPChange;
+        humanHPChange = humanModel.getHp() - humanHPChange;
+        monsterHPChange = monsterModel.getHp() - monsterHPChange;
 
-        if (monsterModel.getHP() <= 0) {
+        if (monsterModel.getHp() <= 0) {
             // 增长经验，如果经验满了还要升级，升级了还要涨技能点，在humanModel实现Exp++功能，而不是简单的set
             boolean levelUpFlag = humanModel.expUp(monsterModel.getWinExp());
             // 适当恢复人物一些HP
-            int recoverHP = (int) (humanModel.getMaxHP() * 0.1) + humanModel.getHP();
+            int recoverHP = (int) (humanModel.getMaxHP() * 0.1) + humanModel.getHp();
             int hpUp = 0;
             if (recoverHP > humanModel.getMaxHP()) {
-                hpUp = humanModel.getMaxHP() - humanModel.getHP();
-                humanModel.setHP(humanModel.getMaxHP());
+                hpUp = humanModel.getMaxHP() - humanModel.getHp();
+                humanModel.setHp(humanModel.getMaxHP());
             } else {
-                hpUp = recoverHP - humanModel.getHP();
-                humanModel.setHP(recoverHP);
+                hpUp = recoverHP - humanModel.getHp();
+                humanModel.setHp(recoverHP);
             }
             // 随机掉落物品和金钱
             humanModel.setMoney(humanModel.getMoney() + monsterModel.getWinMoney());
@@ -179,14 +179,14 @@ public class GameModel {
             e.printStackTrace();
         }
 
-        int humanHPChange = humanModel.getHP();
+        int humanHPChange = humanModel.getHp();
 
         // 怪物攻击人
         monsterModel.attack(humanModel);
 
-        humanHPChange = humanModel.getHP() - humanHPChange;
+        humanHPChange = humanModel.getHp() - humanHPChange;
 
-        if (humanModel.getHP() <= 0) {
+        if (humanModel.getHp() <= 0) {
             monsterModel = null;
 
             int moneyChange = humanModel.getMoney();

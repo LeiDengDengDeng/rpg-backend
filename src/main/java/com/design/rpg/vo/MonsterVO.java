@@ -10,8 +10,8 @@ import lombok.Data;
 @Data
 public class MonsterVO {
     private int maxHP;  // 最大生命值
-    private int HP;     // 当前生命值
-    private int ATK;
-    private int DEF;
+    private int hp;     // 当前生命值
+    private int atk;
+    private int def;
     private MonsterType monsterType;
 }

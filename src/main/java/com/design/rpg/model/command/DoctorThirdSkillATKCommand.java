@@ -27,16 +27,16 @@ public class DoctorThirdSkillATKCommand implements HumanATKCommand {
         if(cdMap.get(this.getClass())>0){return;}
 
         //攻击
-        int attack=humanModel.getATK()+humanModel.getSpirit();
-        int defence=monsterModel.getDEF();
+        int attack=humanModel.getAtk()+humanModel.getSpirit();
+        int defence=monsterModel.getDef();
         int hurt=attack>defence?attack-defence:0;
-        monsterModel.setHP(monsterModel.getHP()-hurt);
+        monsterModel.setHp(monsterModel.getHp()-hurt);
         //自愈
-        int HP=(int)(humanModel.getMaxHP()*0.1)+humanModel.getHP();
+        int HP=(int)(humanModel.getMaxHP()*0.1)+humanModel.getHp();
         if(HP>=humanModel.getMaxHP()){
-            humanModel.setHP(humanModel.getMaxHP());
+            humanModel.setHp(humanModel.getMaxHP());
         }else{
-            humanModel.setHP(HP);
+            humanModel.setHp(HP);
         }
         //当前cd设为cd值
         cdMap.replace(this.getClass(),this.getCD()+1);

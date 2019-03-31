@@ -26,6 +26,6 @@ public class SoldierHumanModel extends HumanModel {
         this.setPower(this.getPower()+3);
         this.setEndurance(this.getEndurance()+3);
         this.setLuck(this.getLuck()+1);
-        this.setMaxHP(this.getMaxHP()*this.getLevel()+this.getEndurance()*10+this.getRole().getHP());
+        this.setMaxHP(this.getMaxHP()*this.getLevel()+this.getEndurance()*10+this.getRole().getHp());
     }
 }

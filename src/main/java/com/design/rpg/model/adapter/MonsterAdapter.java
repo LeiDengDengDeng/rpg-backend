@@ -16,7 +16,7 @@ public class MonsterAdapter extends MonsterModel {
 
     @Override
     public void attack(HumanModel humanModel) {
-        int dmg = this.humanModel.getATK() - humanModel.getDEF() > 0 ? this.humanModel.getATK() - humanModel.getDEF() : 0;
-        humanModel.setHP(humanModel.getHP() - dmg);
+        int dmg = this.humanModel.getAtk() - humanModel.getDef() > 0 ? this.humanModel.getAtk() - humanModel.getDef() : 0;
+        humanModel.setHp(humanModel.getHp() - dmg);
     }
 }

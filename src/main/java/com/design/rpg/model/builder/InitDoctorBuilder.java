@@ -28,7 +28,7 @@ public class InitDoctorBuilder implements HumanBuilder {
         doctorHumanModel.setLuck(2);
         doctorHumanModel.setMoney(0);
         doctorHumanModel.setMaxHP(100);
-        doctorHumanModel.setHP(100);
+        doctorHumanModel.setHp(100);
         doctorHumanModel.setHumanType(HumanType.DOCTOR);
 
     }

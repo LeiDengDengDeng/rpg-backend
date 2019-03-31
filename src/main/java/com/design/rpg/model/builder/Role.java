@@ -13,16 +13,16 @@ public class Role {
     private Body body;
     private Weapon weapon;
 
-    public int getATK(){
+    public int getAtk(){
 
-        return (head==null?0:head.getATK())+(body==null?0:body.getATK())+(weapon==null?0:weapon.getATK());
+        return (head==null?0:head.getAtk())+(body==null?0:body.getAtk())+(weapon==null?0:weapon.getAtk());
     }
-    public int getDEF(){
-        return (head==null?0:head.getDEF())+(body==null?0:body.getDEF())+(weapon==null?0:weapon.getDEF());
+    public int getDef(){
+        return (head==null?0:head.getDef())+(body==null?0:body.getDef())+(weapon==null?0:weapon.getDef());
     }
 
-    public int getHP(){
-        return (head==null?0:head.getHP())+(body==null?0:body.getHP())+(weapon==null?0:weapon.getHP());
+    public int getHp(){
+        return (head==null?0:head.getHp())+(body==null?0:body.getHp())+(weapon==null?0:weapon.getHp());
     }
 
 }

@@ -2,7 +2,6 @@ package com.design.rpg.vo;
 
 import com.design.rpg.form.HumanType;
 import com.design.rpg.model.builder.Role;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -14,8 +13,10 @@ import java.util.List;
 @Data
 public class HumanVO {
     private int maxHP;  // 最大生命值
+    private int hp;     // 当前生命值
 
-    private int HP;     // 当前生命值
+    private int atk;
+    private int def;
 
     private int level;
     private int curLevelExp;
@@ -36,9 +37,4 @@ public class HumanVO {
     private Role role;              //身上的装备
 
     private List<SkillVO> skills;
-
-    @JsonProperty("HP")
-    public int getHP() {
-        return HP;
-    }
 }

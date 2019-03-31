@@ -27,10 +27,10 @@ public class SoldierThirdSkillATKCommand implements HumanATKCommand {
         if(cdMap.get(this.getClass())>0){return;}
 
         //攻击
-        int attack=(int)(humanModel.getATK()*1.5)+humanModel.getPower()*3;
-        int defence=monsterModel.getDEF();
+        int attack=(int)(humanModel.getAtk()*1.5)+humanModel.getPower()*3;
+        int defence=monsterModel.getDef();
         int hurt=attack>defence?attack-defence:0;
-        monsterModel.setHP(monsterModel.getHP()-hurt);
+        monsterModel.setHp(monsterModel.getHp()-hurt);
 
         //当前cd设为cd值
         cdMap.replace(this.getClass(),this.getCD()+1);

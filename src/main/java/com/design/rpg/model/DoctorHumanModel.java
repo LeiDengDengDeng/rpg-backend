@@ -1,10 +1,7 @@
 package com.design.rpg.model;
 
 
-import com.design.rpg.form.HumanType;
-import com.design.rpg.model.builder.InitRoleBuilder;
-import com.design.rpg.model.builder.RoleBuilder;
-import com.design.rpg.model.command.*;
+import com.design.rpg.model.command.HumanATKCommand;
 
 
 /**
@@ -29,6 +26,6 @@ public class DoctorHumanModel extends HumanModel {
         this.setPower(this.getPower()+1);
         this.setEndurance(this.getEndurance()+1);
         this.setLuck(this.getLuck()+1);
-        this.setMaxHP(this.getMaxHP()*this.getLevel()+this.getEndurance()*10+this.getRole().getHP());
+        this.setMaxHP(this.getMaxHP()*this.getLevel()+this.getEndurance()*10+this.getRole().getHp());
     }
 }

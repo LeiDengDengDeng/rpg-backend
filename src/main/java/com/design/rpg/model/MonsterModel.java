@@ -12,15 +12,15 @@ import java.util.List;
  */
 @Data
 public class MonsterModel extends Creature {
-   private int ATK;
-   private int DEF;
+   private int atk;
+   private int def;
    private int winExp;
    private int winMoney;
    private MonsterType monsterType;
    private List<Equipment> winEquipment;
 
    public void attack(HumanModel humanModel){
-         humanModel.setHP(humanModel.getHP()-(this.getATK()-humanModel.getDEF()>0?this.getATK()-humanModel.getDEF():0));
+         humanModel.setHp(humanModel.getHp()-(this.getAtk()-humanModel.getDef()>0?this.getAtk()-humanModel.getDef():0));
    }
 
 

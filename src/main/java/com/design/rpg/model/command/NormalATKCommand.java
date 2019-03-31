@@ -15,10 +15,10 @@ public class NormalATKCommand implements HumanATKCommand {
     @Override
     public void calculateATK(HumanModel humanModel, MonsterModel monsterModel) {
         Map<Class,Integer> cdMap=humanModel.getMyCDMap();
-        int attack=humanModel.getATK();
-        int defence=monsterModel.getDEF();
+        int attack=humanModel.getAtk();
+        int defence=monsterModel.getDef();
         int hurt=attack>defence?attack-defence:0;
-        monsterModel.setHP(monsterModel.getHP()-hurt);
+        monsterModel.setHp(monsterModel.getHp()-hurt);
         cdMap.replaceAll((k,v)->v==0?v:v-1);
 
     }

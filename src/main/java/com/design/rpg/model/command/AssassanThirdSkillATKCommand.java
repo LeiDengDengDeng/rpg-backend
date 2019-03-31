@@ -27,10 +27,10 @@ public class AssassanThirdSkillATKCommand implements HumanATKCommand {
         if(cdMap.get(this.getClass())>0){return;}
 
         //攻击
-        int attack=humanModel.getATK()+humanModel.getAgility()*4;
-        int defence=monsterModel.getDEF();
+        int attack=humanModel.getAtk()+humanModel.getAgility()*4;
+        int defence=monsterModel.getDef();
         int hurt=attack>defence?attack-defence:0;
-        monsterModel.setHP(monsterModel.getHP()-hurt);
+        monsterModel.setHp(monsterModel.getHp()-hurt);
 
         //当前cd设为cd值
         cdMap.replace(this.getClass(),this.getCD()+1);
