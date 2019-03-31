@@ -8,10 +8,10 @@ import com.design.rpg.model.HumanModel;
 import com.design.rpg.model.builder.InitAssassinBuilder;
 import com.design.rpg.model.builder.InitDoctorBuilder;
 import com.design.rpg.model.builder.InitSoldierBuilder;
-import com.design.rpg.util.Converter;
 import com.design.rpg.vo.HumanVO;
 import com.design.rpg.vo.InfoVO;
 import com.design.rpg.vo.StrengthResultVO;
+import com.design.rpg.vo.factory.HumanVOFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,21 +52,21 @@ public class GameController {
     public Response<HumanVO> splitEquipment(@PathVariable String id) {
         HumanModel humanModel = gameModel.getHumanModel();
         humanModel.splitEquipment(id);
-        return Response.okResponse((HumanVO) Converter.map(humanModel, HumanVO.class));
+        return Response.okResponse(HumanVOFactory.createHumanVO(humanModel));
     }
 
     @PostMapping("/equipment/{id}/equip")
     public Response<HumanVO> equipEquipment(@PathVariable String id) {
         HumanModel humanModel = gameModel.getHumanModel();
         humanModel.equip(id);
-        return Response.okResponse((HumanVO) Converter.map(humanModel, HumanVO.class));
+        return Response.okResponse(HumanVOFactory.createHumanVO(humanModel));
     }
 
     @PostMapping("/equipment/{id}/strength")
     public Response<StrengthResultVO> strengthEquipment(@PathVariable String id) {
         HumanModel humanModel = gameModel.getHumanModel();
         boolean successFlag = humanModel.strengthEquipment(id);
-        return Response.okResponse(new StrengthResultVO((HumanVO) Converter.map(humanModel, HumanVO.class), successFlag));
+        return Response.okResponse(new StrengthResultVO(HumanVOFactory.createHumanVO(humanModel), successFlag));
     }
 
 }

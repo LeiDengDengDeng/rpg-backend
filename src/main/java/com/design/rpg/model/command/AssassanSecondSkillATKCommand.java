@@ -51,6 +51,6 @@ public class AssassanSecondSkillATKCommand implements HumanATKCommand {
 
     @Override
     public char getBindKey() {
-        return 'J';
+        return 'K';
     }
 }
